@@ -30,11 +30,12 @@ public class AnimatedBoxCollider : Behavior {
         {
             frame -= Frames[index].FrameCount;
             index++;
-        }
 
-        if (index >= Frames.Length)
-        {
-            index = Frames.Length - 1;
+            if (index >= Frames.Length)
+            {
+                index = Frames.Length - 1;
+                break;
+            }
         }
 
         SetFrameInfo(index);

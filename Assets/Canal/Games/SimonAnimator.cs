@@ -119,6 +119,10 @@ public class SimonAnimator : Behavior
 
     public void Update()
     {
+        if (Animator.CurrentClip == null)
+        {
+            return;
+        }
         string currentClip = Animator.CurrentClip.name;
         foreach (AnimationMap map in ColliderMaps)
         {
