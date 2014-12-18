@@ -47,6 +47,8 @@ namespace Canal.Unity.Platformer
         public float DoubleJumpHeight;
         public float Gravity;
         public float MaxFallSpeed;
+
+        public bool FacingRight = true;
     }
 }
 

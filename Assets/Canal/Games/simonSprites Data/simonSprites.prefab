@@ -675,17 +675,17 @@ MonoBehaviour:
     attachPoints: []
   - name: simonBasic_Hurt
     boundsData:
-    - {x: 0, y: -.03125, z: 0}
+    - {x: 0, y: .90625, z: 0}
     - {x: 1, y: 1.8125, z: 0}
     untrimmedBoundsData:
-    - {x: 0, y: -.03125, z: 0}
+    - {x: 0, y: .90625, z: 0}
     - {x: 1, y: 1.8125, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.5, y: -.9375, z: 0}
-    - {x: .5, y: -.9375, z: 0}
-    - {x: -.5, y: .875, z: 0}
-    - {x: .5, y: .875, z: 0}
+    - {x: -.5, y: 0, z: 0}
+    - {x: .5, y: 0, z: 0}
+    - {x: -.5, y: 1.8125, z: 0}
+    - {x: .5, y: 1.8125, z: 0}
     normals: []
     tangents: []
     uvs:
@@ -1362,7 +1362,7 @@ MonoBehaviour:
   loadable: 0
   invOrthoSize: 2
   halfTargetHeight: 8
-  buildKey: 748733447
+  buildKey: 1737730764
   dataGuid: a832b979194944a50a0dfbd7c11e961a
   managedSpriteCollection: 0
   hasPlatformData: 0

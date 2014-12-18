@@ -4,12 +4,14 @@ using System.Collections;
 using Canal.Unity;
 using Canal.Unity.Platformer;
 
-public class SimonController : MonoBehaviour {
+public class SimonController : Behavior, IDamageable<int> {
 
     public SimonModel Model;
     public SimonAnimator Animator;
 
     private bool startedJump = false;
+    private bool previousTakingDamage = false;
+    private float hurtTimer;
 
     public void Update()
     {
@@ -18,6 +20,27 @@ public class SimonController : MonoBehaviour {
         {
             Model.Acceleration.x = 0;
             return;
+        }
+
+        if (Model.TakingDamage)
+        {
+            if (Model.Collision.OnGround && Model.Velocity.y <= 0)
+            {
+                Model.TakingDamage = false;
+                hurtTimer = 1.0f;
+            }
+            Animator.Hurt();
+            Model.Acceleration.x = 0;
+            return;
+        }
+        else if (hurtTimer > 0)
+        {
+            Animator.StartHurtFlash();
+            hurtTimer -= Time.deltaTime;
+        }
+        else
+        {
+            Animator.StopHurtFlash();
         }
 
         if (Model.Collision.OnGround)
@@ -89,6 +112,7 @@ public class SimonController : MonoBehaviour {
                 break;
 
             case SimonModel.MovementState.InAir:
+                movement = Model.TakingDamage ? 0 : movement;
                 Model.Acceleration.x = movement * (Model.WalkAcceleration + Model.KineticFriction);
                 break;
 
@@ -161,5 +185,16 @@ public class SimonController : MonoBehaviour {
     private void OnAttackAnimationCompleted()
     {
         Model.Attacking = false;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (!Model.TakingDamage && hurtTimer <= 0)
+        {
+            Model.TakingDamage = true;
+            Model.Acceleration.x = 0;
+            Model.Velocity.x = (Model.FacingRight ? -3 : 3);
+            Model.Velocity.y = Mathf.Sqrt(1 * 2 * Model.Gravity);
+        }
     }
 }

@@ -26,10 +26,10 @@ public class SubweaponController : Behavior {
             component = collider.attachedRigidbody;
         }
 
-        TestHitScript hit = component.GetComponent<TestHitScript>();
+        EnemyHurtBox hit = component.GetComponent<EnemyHurtBox>();
         if (hit != null)
         {
-            hit.TakeHit();
+            hit.ReceiveHit(new EnemyHurtBox.AttackInfo() { AttackPower = 1 });
         }
     }
 

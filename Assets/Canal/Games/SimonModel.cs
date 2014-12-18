@@ -12,9 +12,9 @@ public class SimonModel : WalkerModel {
         InAir
     }
         
+    public bool TakingDamage;
     public bool Attacking;
     public MovementState Movement;
-    public bool FacingRight = true;
 
 	public GameObject HolyWaterPrefab;
 }

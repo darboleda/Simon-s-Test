@@ -117,6 +117,34 @@ public class SimonAnimator : Behavior
         }
     }
 
+    public void Hurt()
+    {
+        Animator.Play("Hurt");
+    }
+
+    public void StartHurtFlash()
+    {
+        DamageFlash = true;
+        this.StopCoroutine("StartDamageFlash");
+        this.StartCoroutine("StartDamageFlash");
+    }
+
+    public void StopHurtFlash()
+    {
+        DamageFlash = false;
+        Animator.Sprite.renderer.enabled = true;
+    }
+
+    private bool DamageFlash;
+    public System.Collections.IEnumerator StartDamageFlash()
+    {
+        while (DamageFlash)
+        {
+            Animator.Sprite.renderer.enabled = !Animator.Sprite.renderer.enabled;
+            yield return null;
+        }
+    }
+
     public void Update()
     {
         if (Animator.CurrentClip == null)
