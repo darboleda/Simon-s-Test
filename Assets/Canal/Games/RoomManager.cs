@@ -37,6 +37,11 @@ public class RoomManager : Behavior
         else
         {
             SetCurrentRoom(StartingRoom);
+            Transform roomTransform = StartingRoom.transform;
+            roomTransform.parent = roomContainer;
+            roomTransform.localPosition = Vector3.zero;
+            roomTransform.localScale = Vector3.one;
+            roomTransform.localEulerAngles = Vector3.zero;
         }
 
         GameObject characterInstance = GameObject.Instantiate(CharacterPrefab) as GameObject;
@@ -62,11 +67,11 @@ public class RoomManager : Behavior
             return currentRoom;
         }
 
+        newRoom.gameObject.SetActive(true);
         if (currentRoom != null)
         {
             currentRoom.gameObject.SetActive(false);
         }
-        newRoom.gameObject.SetActive(true);
         for (int i = 0, count = newRoom.Exits.Length; i < count; ++i)
         {
             LoadRoom(Rooms[newRoom.Exits[i].TargetRoomId]);
@@ -156,12 +161,15 @@ public class RoomManager : Behavior
             if (exit.CheckExit(character, out offset))
             {
                 this.SetCurrentRoom(exit.TargetRoomId);
-                character.Position = currentRoom.EntrancePositions[exit.TargetRoomEntranceIndex] + offset;
+                character.Position = currentRoom.Entrances[exit.TargetRoomEntranceIndex].GetEntryPosition(offset);
+                character.Transform.Translate(Vector2.zero);
 
                 CameraController.Target = character.transform;
                 CameraController.CurrentPositioner = currentRoom.DefaultCameraPositioner;
                 character.transform.parent = currentRoom.transform;
-                Debug.Log(exit.TargetRoomId);
+                Debug.Log(exit.TargetRoomEntranceIndex);
+                CameraController.LateUpdate();
+                break;
             }
         }
     }
