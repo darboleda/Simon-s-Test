@@ -4,14 +4,14 @@ using System.Collections;
 using Canal.Unity;
 
 public class TestHitScript : Behavior {
-    public MeshRenderer renderer;
+    public MeshRenderer Renderer;
     public void TakeHit()
     {
-        renderer.material.color = Color.red;
+        Renderer.material.color = Color.red;
     }
 
     public void Update()
     {
-        renderer.material.color = Color.Lerp(renderer.material.color, Color.white, 0.1f);
+        Renderer.material.color = Color.Lerp(Renderer.material.color, Color.white, 0.1f);
     }
 }

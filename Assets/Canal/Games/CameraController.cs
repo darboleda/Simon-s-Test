@@ -5,12 +5,13 @@ using Canal.Unity;
 
 public class CameraController : Behavior
 {
-	public new Camera camera;	
-    public CameraPositioner currentPositioner;
+	public Camera Camera;	
+    public Transform Target;
+    public CameraPositioner CurrentPositioner;
 	
     public void LateUpdate()
 	{
-        camera.transform.position = currentPositioner.GetCameraWorldPosition(camera);
-        camera.transform.eulerAngles = currentPositioner.GetCameraWorldEulerAngles(camera);
+        Camera.transform.position = CurrentPositioner.GetCameraWorldPosition(Camera, Target);
+        Camera.transform.eulerAngles = CurrentPositioner.GetCameraWorldEulerAngles(Camera, Target);
 	}
 }

@@ -5,6 +5,7 @@ namespace Canal.Unity
     public class PositionTransform : Behavior
     {
 		public PositionModel Model;
+        public float ZOverride = -1;
 
 		public void Translate(Vector2 delta)
 		{
@@ -16,8 +17,11 @@ namespace Canal.Unity
 			Vector3 position = Position;
 			position.x = (0.0625f * Mathf.FloorToInt(position.x * 16));
 			position.y = (0.0625f * Mathf.FloorToInt(position.y * 16));
-			position.z = (0.0625f * Mathf.FloorToInt(position.z * 16));
 			transform.position = position;
+
+            position = transform.localPosition;
+            position.z = ZOverride;
+            transform.localPosition = position;
 		}
 
 		public Vector3 Position

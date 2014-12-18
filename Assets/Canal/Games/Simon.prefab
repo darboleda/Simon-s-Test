@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Model: {fileID: 11400004}
+  zOverride: -1
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1

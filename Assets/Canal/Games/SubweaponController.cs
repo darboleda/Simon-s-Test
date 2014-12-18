@@ -32,4 +32,9 @@ public class SubweaponController : Behavior {
             hit.TakeHit();
         }
     }
+
+    public void OnBecameInvisible()
+    {
+        GameObject.Destroy(this.gameObject);
+    }
 }
