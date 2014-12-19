@@ -7,21 +7,21 @@ using Canal.Unity;
 
 public class RoomManager : Behavior
 {
-    public RoomList Rooms;
+    private RoomList Rooms;
     public RoomModel StartingRoom;
 
     public GameObject CharacterPrefab;
-    public CameraController CameraController;
+    private CameraController cameraController;
 
     private PositionModel character;
 
-    private Dictionary<string, RoomModel> loadedRooms;
+    private Dictionary<string, RoomModel> loadedRooms = new Dictionary<string, RoomModel>();
     private Transform roomContainer;
     private RoomModel currentRoom;
 
     public void Awake()
     {
-        loadedRooms = new Dictionary<string, RoomModel>();
+        Rooms = RequestFeature<RoomList>("Room List");
 
         roomContainer = new GameObject().transform;
         roomContainer.name = "Room Container";
@@ -48,8 +48,9 @@ public class RoomManager : Behavior
         character = characterInstance.GetComponent<PositionModel>();
         character.Position = currentRoom.DefaultSpawnPosition;
 
-        CameraController.Target = characterInstance.transform;
-        CameraController.CurrentPositioner = currentRoom.DefaultCameraPositioner;
+        cameraController = RequestFeature<CameraController>("Camera");
+        cameraController.Target = characterInstance.transform;
+        cameraController.CurrentPositioner = currentRoom.DefaultCameraPositioner;
         characterInstance.transform.parent = currentRoom.transform;
 
     }
@@ -164,11 +165,11 @@ public class RoomManager : Behavior
                 character.Position = currentRoom.Entrances[exit.TargetRoomEntranceIndex].GetEntryPosition(offset);
                 character.Transform.Translate(Vector2.zero);
 
-                CameraController.Target = character.transform;
-                CameraController.CurrentPositioner = currentRoom.DefaultCameraPositioner;
+                cameraController.Target = character.transform;
+                cameraController.CurrentPositioner = currentRoom.DefaultCameraPositioner;
                 character.transform.parent = currentRoom.transform;
                 Debug.Log(exit.TargetRoomEntranceIndex);
-                CameraController.LateUpdate();
+                cameraController.LateUpdate();
                 break;
             }
         }
@@ -179,8 +180,8 @@ public class RoomManager : Behavior
         SetCurrentRoom(Rooms[currentRoomIndex].RoomId);
         character.Position = currentRoom.DefaultSpawnPosition;
 
-        CameraController.Target = character.transform;
-        CameraController.CurrentPositioner = currentRoom.DefaultCameraPositioner;
+        cameraController.Target = character.transform;
+        cameraController.CurrentPositioner = currentRoom.DefaultCameraPositioner;
         character.transform.parent = currentRoom.transform;
     }
 }
