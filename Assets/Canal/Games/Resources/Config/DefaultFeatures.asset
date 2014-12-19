@@ -18,3 +18,4 @@ MonoBehaviour:
     FeaturePath: Features/NesCamera
   - FeatureId: Room List
     FeaturePath: Features/TheRooms
+  RequiredFeatures: []

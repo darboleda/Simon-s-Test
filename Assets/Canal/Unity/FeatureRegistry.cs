@@ -19,7 +19,7 @@ namespace Canal.Unity
         {
             if (list == null)
             {
-                list = Resources.Load("DefaultFeatures") as FeatureList;
+                list = Resources.Load("Config/DefaultFeatures") as FeatureList;
             }
 
             if (requiredFeatures != null)
