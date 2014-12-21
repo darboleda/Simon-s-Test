@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Canal.Unity;
+using Canal.Unity.States;
 
-public class RoomManager : Behavior
+public class RoomManager : GameStateBehavior
 {
     private RoomList Rooms;
     public RoomModel StartingRoom;
@@ -47,12 +48,13 @@ public class RoomManager : Behavior
         GameObject characterInstance = GameObject.Instantiate(CharacterPrefab) as GameObject;
         character = characterInstance.GetComponent<PositionModel>();
         character.Position = currentRoom.DefaultSpawnPosition;
+        character.Transform.Translate(Vector2.zero);
 
         cameraController = RequestFeature<CameraController>("Camera");
         cameraController.Target = characterInstance.transform;
         cameraController.CurrentPositioner = currentRoom.DefaultCameraPositioner;
         characterInstance.transform.parent = currentRoom.transform;
-
+        cameraController.UpdateCamera();
     }
 
     private RoomModel SetCurrentRoom(string roomId)

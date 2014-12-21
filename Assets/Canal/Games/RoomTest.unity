@@ -82,7 +82,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1355133934}
+  - 114: {fileID: 1355133935}
   - 114: {fileID: 1355133933}
+  - 114: {fileID: 1355133937}
+  - 114: {fileID: 1355133936}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Features
@@ -101,8 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc498492e98b77e47ba77212abf37c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingConfiguration: {fileID: 11400000, guid: 0b1ee1284115b9448aa2befe2c1a98d0,
-    type: 2}
 --- !u!4 &1355133934
 Transform:
   m_ObjectHideFlags: 0
@@ -115,3 +116,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1355133935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1355133932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9af22f0b69a6ae429509e53aeab5418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameStates:
+  - Id: Title
+    AssetPath: States/Title
+  - Id: Quest
+    AssetPath: States/Quest
+  modeManager: {fileID: 1355133933}
+--- !u!114 &1355133936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1355133932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57652b8c0c8e26041827a49bc49b1216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1355133937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1355133932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7515cd1637f6043be6a19232912829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateBehavior: {fileID: 1355133936}

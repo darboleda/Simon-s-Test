@@ -11,7 +11,12 @@ public class CameraController : Behavior
 	
     public void LateUpdate()
 	{
+        UpdateCamera();
+	}
+
+    public void UpdateCamera()
+    {
         Camera.transform.position = CurrentPositioner.GetCameraWorldPosition(Camera, Target);
         Camera.transform.eulerAngles = CurrentPositioner.GetCameraWorldEulerAngles(Camera, Target);
-	}
+    }
 }

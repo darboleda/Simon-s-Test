@@ -9,13 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c0b0f294deb61d479002a9c191d8fe7, type: 3}
-  m_Name: Default
+  m_Name: Title
   m_EditorClassIdentifier: 
-  ParentAssetPath: Modes/Game
-  SupportedFeatures:
-  - Id: Room List
-    AssetPath: Features/TheRooms
-  - Id: Camera
-    AssetPath: Features/NesCamera
-  RequiredFeatures:
-  - Room Manager
+  ParentAssetPath: Modes/Root
+  SupportedFeatures: []
+  RequiredFeatures: []

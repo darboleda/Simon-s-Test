@@ -6,18 +6,8 @@ namespace Canal.Unity.Modes
 {
     public class GameModeManager : Behavior
     {
-        public ModeConfiguration StartingConfiguration;
-
         private Dictionary<ModeConfiguration, GameMode> loadedModes = new Dictionary<ModeConfiguration, GameMode>();
         private GameMode currentGameMode;
-
-        public void Awake()
-        {
-            if (StartingConfiguration != null)
-            {
-                SetGameMode(StartingConfiguration);
-            }
-        }
 
         public void SetGameMode(ModeConfiguration configuration)
         {
@@ -26,6 +16,21 @@ namespace Canal.Unity.Modes
             currentGameMode.LoadRequiredFeatures();
 
             // TODO unload previous game mode
+            HashSet<ModeConfiguration> configurationsToKeep = new HashSet<ModeConfiguration>();
+            GameMode keep = currentGameMode;
+            while (keep != null)
+            {
+                configurationsToKeep.Add(keep.Configuration);
+                keep = keep.Parent;
+            } 
+
+            GameMode remove = previousGameMode;
+            while (remove != null && !configurationsToKeep.Contains(remove.Configuration))
+            {
+                loadedModes.Remove(remove.Configuration);
+                GameObject.Destroy(remove.gameObject);
+                remove = remove.Parent;
+            }
         }
 
         public T GetFeature<T>(string id)
@@ -54,4 +59,3 @@ namespace Canal.Unity.Modes
         }
     }
 }
-

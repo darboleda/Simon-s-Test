@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c0b0f294deb61d479002a9c191d8fe7, type: 3}
-  m_Name: Game
+  m_Name: Root
   m_EditorClassIdentifier: 
   ParentAssetPath: 
   SupportedFeatures:
-  - Id: Room Manager
-    AssetPath: Features/RoomManager
+  - Id: Event System
+    AssetPath: Features/EventSystem
   RequiredFeatures:
-  - Room Manager
+  - Event System

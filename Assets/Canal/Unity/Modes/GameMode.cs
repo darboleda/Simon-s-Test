@@ -9,30 +9,31 @@ namespace Canal.Unity.Modes
     {
         public List<Object> featureList = new List<Object>();
 
-        private GameMode parent;
-        private ModeConfiguration configuration;
+        public GameMode Parent { get; private set; }
+        public ModeConfiguration Configuration { get; private set; }
+
         private Dictionary<string, Object> loadedFeatures = new Dictionary<string, Object>();
         private Transform featureContainer;
 
         public void Initialize(ModeConfiguration configuration, GameMode parent = null)
         {
-            this.parent = parent;
-            this.configuration = configuration;
+            this.Parent = parent;
+            this.Configuration = configuration;
             this.featureContainer = new GameObject().transform;
 
-            name = configuration.name;
+            name = string.Format("Mode: {0}", configuration.name);
             featureContainer.name = "Features";
             featureContainer.parent = transform;
         }
 
         public void LoadRequiredFeatures()
         {
-            if (parent != null)
+            if (Parent != null)
             {
-                parent.LoadRequiredFeatures();
+                Parent.LoadRequiredFeatures();
             }
 
-            foreach (string feature in configuration.RequiredFeatures)
+            foreach (string feature in Configuration.RequiredFeatures)
             {
                 GetFeature<Transform>(feature);
             }
@@ -52,9 +53,9 @@ namespace Canal.Unity.Modes
                 return GetFeature<T>(loadedFeature);
             }
 
-            if (parent != null)
+            if (Parent != null)
             {
-                return parent.GetFeature<T>(id);
+                return Parent.GetFeature<T>(id);
             }
 
             return default(T);
@@ -63,7 +64,7 @@ namespace Canal.Unity.Modes
         private Object LoadFeature(string id)
         {
             // Load the feature if it's supported
-            ModeConfiguration.FeatureMap featureInfo = configuration.SupportedFeatures.FirstOrDefault(x => x.Id == id);
+            ModeConfiguration.FeatureMap featureInfo = Configuration.SupportedFeatures.FirstOrDefault(x => x.Id == id);
             if (featureInfo.Id != id)
             {
                 return null;
