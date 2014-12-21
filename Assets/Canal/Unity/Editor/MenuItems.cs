@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 using Canal.Unity;
+using Canal.Unity.Modes;
 
 public class MenuItems
 {
@@ -13,9 +14,9 @@ public class MenuItems
         AssetCreator.CreateScriptableObject<RoomList>();
     }
 
-    [MenuItem("Assets/Create/Feature List")]
-    private static void CreateFeatureList()
+    [MenuItem("Assets/Create/Game Mode Configuration")]
+    private static void CreateGameModeConfiguration()
     {
-        AssetCreator.CreateScriptableObject<FeatureList>();
+        AssetCreator.CreateScriptableObject<ModeConfiguration>();
     }
 }

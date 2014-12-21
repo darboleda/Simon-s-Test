@@ -98,12 +98,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355133932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c860ff4a8fb7b124ba0a3af022d5fd0f, type: 3}
+  m_Script: {fileID: 11500000, guid: dc498492e98b77e47ba77212abf37c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  list: {fileID: 0}
-  requiredFeatures:
-  - Room Manager
+  StartingConfiguration: {fileID: 11400000, guid: 0b1ee1284115b9448aa2befe2c1a98d0,
+    type: 2}
 --- !u!4 &1355133934
 Transform:
   m_ObjectHideFlags: 0

@@ -1,34 +1,27 @@
 ﻿using UnityEngine;
 
+using Canal.Unity.Modes;
 namespace Canal.Unity
 {
     public class Behavior : MonoBehaviour
     {
-        private FeatureRegistry internalFeatureRegistry;
-        private FeatureRegistry featureRegistry
+        private GameModeManager internalGmm;
+        private GameModeManager Gmm
         {
             get
             {
-                if (internalFeatureRegistry == null)
+                if (internalGmm == null)
                 {
-                    GameObject registryContainer = GameObject.FindWithTag(FeatureRegistry.Tag);
-                    if (registryContainer == null)
-                    {
-                        internalFeatureRegistry = new GameObject().AddComponent<FeatureRegistry>();
-                        internalFeatureRegistry.gameObject.tag = FeatureRegistry.Tag;
-                    }
-                    else
-                    {
-                        internalFeatureRegistry = registryContainer.GetComponent<FeatureRegistry>();
-                    }
+                    internalGmm = GameObject.FindObjectOfType<GameModeManager>();
                 }
-                return internalFeatureRegistry;
+                return internalGmm;
             }
         }
 
         public T RequestFeature<T>(string id)
         {
-            return featureRegistry.LoadFeature<T>(id);
+            Debug.Log("REQUESTING FEATURE " + id);
+            return Gmm.GetFeature<T>(id);
         }
     }
 }
