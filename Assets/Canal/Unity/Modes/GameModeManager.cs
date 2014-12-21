@@ -50,7 +50,6 @@ namespace Canal.Unity.Modes
 
             gameMode.transform.parent = (parentGameMode == null ? transform : parentGameMode.transform);
             gameMode.Initialize(configuration, parentGameMode);
-            Debug.Log("Initialized " + configuration.name);
             return gameMode;
         }
     }

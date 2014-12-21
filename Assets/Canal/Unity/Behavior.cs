@@ -20,7 +20,6 @@ namespace Canal.Unity
 
         public T RequestFeature<T>(string id)
         {
-            Debug.Log("REQUESTING FEATURE " + id);
             return Gmm.GetFeature<T>(id);
         }
     }
