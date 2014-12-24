@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Model: {fileID: 11400010}
+  ZOverride: -1
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,6 +282,7 @@ MonoBehaviour:
   DoubleJumpHeight: 1
   Gravity: 35
   MaxFallSpeed: 30
+  FacingRight: 1
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
