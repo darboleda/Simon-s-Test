@@ -16,6 +16,8 @@ public class CameraController : Behavior
 
     public void UpdateCamera()
     {
+        if (CurrentPositioner == null || Target == null) return;
+
         Camera.transform.position = CurrentPositioner.GetCameraWorldPosition(Camera, Target);
         Camera.transform.eulerAngles = CurrentPositioner.GetCameraWorldEulerAngles(Camera, Target);
     }

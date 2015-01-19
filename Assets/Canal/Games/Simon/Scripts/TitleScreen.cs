@@ -2,21 +2,29 @@
 using System.Collections;
 
 using Canal.Unity;
-using Canal.Unity.States;
+using Canal.Unity.Framework;
 
 public class TitleScreen : Behavior
 {	
-    public GameStateBehavior StateBehavior;
+    public LevelManager Levels;
+    public RoomManager Rooms;
+
+    public string StartingRoom = "Jova";
+
+    public void Awake()
+    {
+        Levels.LoadLevelAdditive<Level>("Title");
+    }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            StateBehavior.RequestState("Quest");
+            Rooms.SetCurrentRoom(StartingRoom);
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            StateBehavior.RequestState("Title");
+            Levels.LoadLevelAdditive<Level>("Title");
         }
 	}
 }

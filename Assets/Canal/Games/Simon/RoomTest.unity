@@ -82,10 +82,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1355133934}
-  - 114: {fileID: 1355133935}
   - 114: {fileID: 1355133933}
-  - 114: {fileID: 1355133937}
+  - 114: {fileID: 1355133935}
   - 114: {fileID: 1355133936}
+  - 114: {fileID: 1355133937}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Features
@@ -101,9 +101,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355133932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc498492e98b77e47ba77212abf37c08, type: 3}
+  m_Script: {fileID: 11500000, guid: c0a7cec3eeb29464aa8828562aa941b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelRootTag: Level
+  levels: {fileID: 11400000, guid: 907722d9b7f9d744d95f890b84f41de2, type: 2}
 --- !u!4 &1355133934
 Transform:
   m_ObjectHideFlags: 0
@@ -124,15 +126,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355133932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9af22f0b69a6ae429509e53aeab5418, type: 3}
+  m_Script: {fileID: 11500000, guid: 5218d42f93efc0a4395e0af22339e0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStates:
-  - Id: Title
-    AssetPath: States/Title
-  - Id: Quest
-    AssetPath: States/Quest
-  modeManager: {fileID: 1355133933}
 --- !u!114 &1355133936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,9 +137,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355133932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57652b8c0c8e26041827a49bc49b1216, type: 3}
+  m_Script: {fileID: 11500000, guid: a7a71ca3303a0c74896deab6018b44e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelManager: {fileID: 1355133933}
+  CharacterPrefab: {fileID: 11400004, guid: a720e7b142c094f428b940baf1cccfaf, type: 2}
+  FadeTime: .0500000007
 --- !u!114 &1355133937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,4 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7515cd1637f6043be6a19232912829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StateBehavior: {fileID: 1355133936}
+  Levels: {fileID: 1355133933}
+  Rooms: {fileID: 1355133936}
+  StartingRoom: Jova
