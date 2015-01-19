@@ -34,16 +34,15 @@ namespace Canal.Unity.Framework
                 if (manager.currentLevel != null)
                 {
                     manager.currentLevel.OnUnloaded();
-                    manager.currentLevel.gameObject.SetActive(false);
                 }
-                Application.LoadLevelAdditive(levelToLoad);
-
-                yield return null;
 
                 if (manager.currentLevel != null)
                 {
                     Object.Destroy(manager.currentLevel.gameObject);
                 }
+                yield return null;
+                yield return manager.UnloadUnusedAssets();
+                Application.LoadLevelAdditive(levelToLoad);
                 yield return null;
                 manager.currentLevel = GameObject.FindGameObjectsWithTag(manager.LevelRootTag).SelectMany(x => x.GetComponents<Level>()).FirstOrDefault();
                 if (manager.currentLevel != null)
@@ -77,9 +76,9 @@ namespace Canal.Unity.Framework
             return new LevelLoader(this, levelName);
         }
 
-        public IEnumerator UnloadUnusedAssets()
+        public AsyncOperation UnloadUnusedAssets()
         {
-            yield return Resources.UnloadUnusedAssets();
+            return Resources.UnloadUnusedAssets();
         }
     }
 }

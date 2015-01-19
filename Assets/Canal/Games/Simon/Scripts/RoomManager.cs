@@ -89,8 +89,6 @@ public class RoomManager : Behavior
         currentRoom.SetPlayerCharacter(character, entranceId, entranceOffset);
         character.gameObject.SetActive(true);
 
-        yield return LevelManager.UnloadUnusedAssets();
-
         timeLeft = FadeTime;
         Time.timeScale = 1;
 
