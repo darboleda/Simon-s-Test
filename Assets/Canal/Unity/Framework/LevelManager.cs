@@ -7,6 +7,53 @@ namespace Canal.Unity.Framework
 {
     public class LevelManager : Behavior
     {
+        public class LevelLoader
+        {
+            private LevelManager manager;
+            private string levelToLoad;
+            private Level level;
+
+            public T GetLoadedLevel<T>() where T : Level
+            {
+                return level as T;
+            }
+
+            public LevelLoader(LevelManager manager, string levelToLoad)
+            {
+                this.manager = manager;
+                this.levelToLoad = levelToLoad;
+            }
+
+            public Coroutine Load()
+            {
+                return manager.StartCoroutine(BeginLoad());
+            }
+
+            private IEnumerator BeginLoad()
+            {
+                if (manager.currentLevel != null)
+                {
+                    manager.currentLevel.OnUnloaded();
+                    manager.currentLevel.gameObject.SetActive(false);
+                }
+                Application.LoadLevelAdditive(levelToLoad);
+
+                yield return null;
+
+                if (manager.currentLevel != null)
+                {
+                    Object.Destroy(manager.currentLevel.gameObject);
+                }
+                yield return null;
+                manager.currentLevel = GameObject.FindGameObjectsWithTag(manager.LevelRootTag).SelectMany(x => x.GetComponents<Level>()).FirstOrDefault();
+                if (manager.currentLevel != null)
+                {
+                    manager.currentLevel.OnLoaded();
+                }
+                level = manager.currentLevel;
+            }
+        }
+
         [SerializeField]
         private string LevelRootTag;
 
@@ -19,39 +66,15 @@ namespace Canal.Unity.Framework
 
         private Level currentLevel;
 
-        public void LoadLevelAdditive<T>(int index, System.Action<T> callback = null) where T : Level
+        public LevelLoader GetAdditiveLevelLoader(int index)
         {
-            LoadLevelAdditive<T>(levels.GetKeyAtIndex(index), callback);
+            return GetAdditiveLevelLoader(levels.GetKeyAtIndex(index));
         }
 
-        public void LoadLevelAdditive<T>(string key, System.Action<T> callback = null) where T : Level
+        public LevelLoader GetAdditiveLevelLoader(string key)
         {
             string levelName = levels[key];
-
-            if (currentLevel != null)
-            {
-                currentLevel.OnUnloaded();
-                currentLevel.gameObject.SetActive(false);
-            }
-            Application.LoadLevelAdditive(levelName);
-            this.StartCoroutine(WaitForLevelLoad<T>(callback));
-        }
-
-        private IEnumerator WaitForLevelLoad<T>(System.Action<T> callback = null) where T : Level
-        {
-            yield return null;
-
-            if (currentLevel != null)
-            {
-                Object.Destroy(currentLevel.gameObject);
-            }
-            yield return null;
-            currentLevel = GameObject.FindGameObjectsWithTag(this.LevelRootTag).SelectMany(x => x.GetComponents<Level>()).FirstOrDefault();
-            if (currentLevel != null)
-            {
-                currentLevel.OnLoaded();
-            }
-            if (callback != null) callback(currentLevel as T);
+            return new LevelLoader(this, levelName);
         }
 
         public IEnumerator UnloadUnusedAssets()

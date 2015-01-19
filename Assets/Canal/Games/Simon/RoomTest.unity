@@ -143,6 +143,7 @@ MonoBehaviour:
   LevelManager: {fileID: 1355133933}
   CharacterPrefab: {fileID: 11400004, guid: a720e7b142c094f428b940baf1cccfaf, type: 2}
   FadeTime: .0500000007
+  FadeColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &1355133937
 MonoBehaviour:
   m_ObjectHideFlags: 0

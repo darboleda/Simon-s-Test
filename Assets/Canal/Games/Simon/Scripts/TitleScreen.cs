@@ -13,18 +13,18 @@ public class TitleScreen : Behavior
 
     public void Awake()
     {
-        Levels.LoadLevelAdditive<Level>("Title");
+        Levels.GetAdditiveLevelLoader("Title").Load();
     }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            Rooms.SetCurrentRoom(StartingRoom);
+            Rooms.LoadRoom(StartingRoom);
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Levels.LoadLevelAdditive<Level>("Title");
+            Levels.GetAdditiveLevelLoader("Title").Load();
         }
 	}
 }
