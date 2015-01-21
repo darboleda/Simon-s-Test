@@ -18,13 +18,20 @@ public class TitleScreen : Behavior
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetButtonDown("Start"))
         {
             Rooms.LoadRoom(StartingRoom);
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetButtonDown("Exit"))
         {
-            Levels.GetAdditiveLevelLoader("Title").Load();
+            if (Levels.LastLoadedLevelKey == "Title")
+            {
+                Application.Quit();
+            }
+            else
+            {
+                Levels.GetAdditiveLevelLoader("Title").Load();
+            }
         }
 	}
 }

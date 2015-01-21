@@ -10,7 +10,7 @@ namespace Canal.Unity.Framework
         public class LevelLoader
         {
             private LevelManager manager;
-            private string levelToLoad;
+            private string levelKey;
             private Level level;
 
             public T GetLoadedLevel<T>() where T : Level
@@ -18,10 +18,10 @@ namespace Canal.Unity.Framework
                 return level as T;
             }
 
-            public LevelLoader(LevelManager manager, string levelToLoad)
+            public LevelLoader(LevelManager manager, string levelKey)
             {
                 this.manager = manager;
-                this.levelToLoad = levelToLoad;
+                this.levelKey = levelKey;
             }
 
             public Coroutine Load()
@@ -31,6 +31,7 @@ namespace Canal.Unity.Framework
 
             private IEnumerator BeginLoad()
             {
+                string levelToLoad = manager.levels[levelKey];
                 if (manager.currentLevel != null)
                 {
                     manager.currentLevel.OnUnloaded();
@@ -50,6 +51,7 @@ namespace Canal.Unity.Framework
                     manager.currentLevel.OnLoaded();
                 }
                 level = manager.currentLevel;
+                manager.LastLoadedLevelKey = levelKey;
             }
         }
 
@@ -65,6 +67,8 @@ namespace Canal.Unity.Framework
 
         private Level currentLevel;
 
+        public string LastLoadedLevelKey { get; private set; }
+
         public LevelLoader GetAdditiveLevelLoader(int index)
         {
             return GetAdditiveLevelLoader(levels.GetKeyAtIndex(index));
@@ -72,8 +76,7 @@ namespace Canal.Unity.Framework
 
         public LevelLoader GetAdditiveLevelLoader(string key)
         {
-            string levelName = levels[key];
-            return new LevelLoader(this, levelName);
+            return new LevelLoader(this, key);
         }
 
         public AsyncOperation UnloadUnusedAssets()
