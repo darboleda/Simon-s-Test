@@ -18,7 +18,7 @@ public class OrthographicCameraBounds : CameraPositioner {
 		finalPos.y += Offset.y;
         finalPos.z += Offset.z;
 
-        if (camera.isOrthoGraphic)
+        if (camera.orthographic)
         { 
             float halfHeight = camera.orthographicSize;
             float halfWidth = halfHeight * camera.aspect;

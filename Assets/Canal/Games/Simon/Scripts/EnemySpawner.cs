@@ -10,7 +10,7 @@ public class EnemySpawner : Behavior {
 
     public void Awake()
     {
-        if (this.renderer == null)
+        if (this.GetComponent<Renderer>() == null)
         {
             this.gameObject.AddComponent<MeshRenderer>();
         }

@@ -18,6 +18,15 @@ public class SimonAnimator : Behavior
     public SimonModel Model;
     public AnimationMap[] ColliderMaps;
 
+    private new Renderer renderer;
+    public Renderer Renderer
+    {
+        get
+        {
+            return (renderer = renderer ?? Animator.Sprite.GetComponent<Renderer>());
+        }
+    }
+
     public void SetFacing(bool facingRight)
     {
         Animator.Sprite.FlipX = !facingRight;
@@ -132,7 +141,7 @@ public class SimonAnimator : Behavior
     public void StopHurtFlash()
     {
         DamageFlash = false;
-        Animator.Sprite.renderer.enabled = true;
+        Renderer.enabled = true;
     }
 
     private bool DamageFlash;
@@ -140,7 +149,7 @@ public class SimonAnimator : Behavior
     {
         while (DamageFlash)
         {
-            Animator.Sprite.renderer.enabled = !Animator.Sprite.renderer.enabled;
+            Renderer.enabled = !Renderer.enabled;
             yield return null;
         }
     }

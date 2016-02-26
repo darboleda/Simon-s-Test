@@ -8,6 +8,16 @@ public class WolfAnimator : Behavior {
 
     public tk2dSpriteAnimator Animator;
 
+    private new Renderer renderer;
+    public Renderer Renderer
+    {
+        get
+        {
+            return (renderer = renderer ?? Animator.Sprite.GetComponent<Renderer>());
+        }
+    }
+
+
     public void SetFacing(bool facingRight)
     {
         Animator.Sprite.FlipX = facingRight;
@@ -38,7 +48,7 @@ public class WolfAnimator : Behavior {
     {
         DamageFlash = false;
         Animator.Play();
-        Animator.Sprite.renderer.enabled = true;
+        Renderer.enabled = true;
     }
 
     private bool DamageFlash;
@@ -46,7 +56,7 @@ public class WolfAnimator : Behavior {
     {
         while (DamageFlash)
         {
-            Animator.Sprite.renderer.enabled = !Animator.Sprite.renderer.enabled;
+            Renderer.enabled = !Renderer.enabled;
             yield return null;
         }
     }

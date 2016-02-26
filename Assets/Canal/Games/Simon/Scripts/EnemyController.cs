@@ -9,7 +9,7 @@ public abstract class EnemyController : Behavior, IDamageable<int>
 
     public virtual void Awake()
     {
-        if (this.renderer == null)
+        if (this.GetComponent<Renderer>() == null)
         {
             this.gameObject.AddComponent<MeshRenderer>();
         }
