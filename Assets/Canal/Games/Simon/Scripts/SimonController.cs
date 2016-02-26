@@ -96,6 +96,7 @@ public class SimonController : Behavior, IDamageable<int> {
         }
 
         float movement = Input.GetAxisRaw("Horizontal");
+        movement = (Mathf.Abs(movement) < 0.3f ? 0 : movement);
         switch (Model.Movement)
         {
             case SimonModel.MovementState.Standing:
@@ -108,6 +109,7 @@ public class SimonController : Behavior, IDamageable<int> {
                 {
                     Model.FacingRight = false;
                 }
+                Debug.Log(movement);
                 Animator.SetFacing(Model.FacingRight);
                 break;
 
@@ -170,12 +172,13 @@ public class SimonController : Behavior, IDamageable<int> {
                 break;
 
             case SimonModel.MovementState.Standing:
-                if (Mathf.Abs(Model.Acceleration.x) > 0)
+                if (Mathf.Abs(Model.Acceleration.x) > 0.05f)
                 {
                     Animator.Walk();
                 }
                 else
                 {
+                    Debug.Log("WTF????");
                     Animator.Stand();
                 }
                 break;
